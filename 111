@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正在跳转...</title>
+    <style>
+        body { 
+            font-family: "PingFang SC", Helvetica, Arial, sans-serif; 
+            text-align: center; 
+            padding-top: 60px; 
+            background:#f7f7f7; 
+            color:#333;
+        }
+        .loader { 
+            font-size: 18px; 
+            margin-bottom: 10px;
+        }
+        .countdown {
+            font-size: 32px;
+            font-weight: bold;
+            color: #ff5722;
+            margin-bottom: 20px;
+        }
+        .note {
+            font-size: 14px;
+            color: #666;
+        }
+        a.manual {
+            color: #ff5722;
+            text-decoration: underline;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #ff9800;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="loader">正在为你打开美团券包，请稍候...</div>
+    <div class="countdown" id="countdown">5</div>
+    <p class="note">如果未自动跳转，请 <a id="manualLink" class="manual" href="#">点击这里</a> 进入资源页。</p>
+    <button onclick="openCoupon()">若未看到券页，点此打开</button>
+
+    <script>
+        const couponUrl = "https://meituan.tuikemima.net/#/pages/collection/index?uid=123549&childId=1001";
+        const targetUrl = "https://pan.quark.cn/s/fe83b9734eb9";
+
+        // 新窗口打开券包
+        window.open(couponUrl, "_blank");
+
+        let seconds = 5;
+        const countdownEl = document.getElementById('countdown');
+        const interval = setInterval(() => {
+            seconds--;
+            countdownEl.textContent = seconds;
+            if (seconds <= 0) {
+                clearInterval(interval);
+                window.location.href = targetUrl;
+            }
+        }, 1000);
+
+        document.getElementById("manualLink").href = targetUrl;
+
+        function openCoupon() {
+            window.open(couponUrl, "_blank");
+        }
+    </script>
+</body>
+</html>
